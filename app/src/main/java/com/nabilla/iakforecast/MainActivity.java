@@ -1,13 +1,18 @@
-package com.nabilla.iakforecast;
+  package com.nabilla.iakforecast;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.icu.text.LocaleDisplayNames;
+import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,7 +26,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Format;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -116,6 +123,15 @@ public class MainActivity extends AppCompatActivity {
 
                     dataCuaca.setMax(temp.getDouble("max"));
                     dataCuaca.setMin(temp.getDouble("min"));
+
+                    JSONArray arrayWeather = object.getJSONArray("weather");
+                    Log.d("TEST", String.valueOf(arrayWeather.length()));
+
+                    for (int j = 0; j < arrayWeather.length(); j++){
+                        JSONObject objectWeather = arrayWeather.getJSONObject(i);
+                        dataCuaca.setCuaca(objectWeather.getString("main"));
+                    }
+
                     dataCuacaList.add(dataCuaca);
                 }
 
@@ -134,6 +150,40 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(dataCuacaList);
             progressDialog.hide();
             adapter.notifyDataSetChanged();
+        }
+
+        /*6 Mei 2017-pertemuan 2*/
+        /*Fetch JSON(request data)*/
+
+        private void fetchJsonWeather(String response){
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONArray jsonArray = jsonObject.getJSONArray("list");
+
+                for (int i = 0; i < jsonArray.length(); i++){
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    JSONObject temp = object.getJSONObject("temp");
+                    JSONArray weather = object.getJSONArray("weather");
+
+                    for (int j=0; j< weather.length(); i++){
+                        JSONObject jsonObjectWeather = weather.getJSONObject(j);
+                        Log.d("JsonObjectWeather", object.getString("main"));
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /*Untuk ngeconvert long ke date*/
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        private String convertDate(long dt){
+            Date date = new Date(dt*1000);
+            Format formatDate = new SimpleDateFormat("EEE, dd MMM");
+
+            return formatDate.format(formatDate);
         }
     }
 }

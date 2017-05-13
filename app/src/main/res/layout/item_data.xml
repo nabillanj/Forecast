@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
-
-    <TextView
-        android:id="@+id/tv_max"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:elevation="3dp"
+    android:layout_margin="5dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textColor="#b60f0f"/>
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tv_min"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textColor="#2d6e11"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_max"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#b60f0f"/>
+
+        <TextView
+            android:id="@+id/tv_min"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#2d6e11"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

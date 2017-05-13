@@ -1,16 +1,14 @@
 package com.nabilla.iakforecast;
 
-
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.ViewHolder>{
 
@@ -34,6 +32,12 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public void onBindViewHolder(RecyclerviewAdapter.ViewHolder holder, int position) {
         holder.tv_max.setText("Maks suhu : "+dataCuacaList.get(position).getMax().toString());
         holder.tv_min.setText("Min suhu : "+dataCuacaList.get(position).getMin().toString());
+        holder.setOnClickListener(new InterfaceOnClickListener() {
+            @Override
+            public void onItemClick(int selectedPos) {
+                selectedPos = selectedPos;
+            }
+        });
     }
 
     @Override
@@ -41,8 +45,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         return dataCuacaList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        InterfaceOnClickListener onClickListener;
         TextView tv_max, tv_min;
 
         public ViewHolder(View itemView) {
@@ -50,6 +55,20 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
             tv_max = (TextView) itemView.findViewById(R.id.tv_max);
             tv_min = (TextView) itemView.findViewById(R.id.tv_min);
+
+            itemView.setOnClickListener(this);
+        }
+
+        public void setOnClickListener(InterfaceOnClickListener onClickListener){
+            this.onClickListener = onClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("MaxSuhu", tv_max.getText());
+            intent.putExtra("MinSuhu", tv_min.getText());
+            context.startActivity(intent);
         }
     }
 }
