@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="pref_location"
+        android:defaultValue="@string/default_value"
+        android:title="Change Location"/>
+    <ListPreference
+        android:key="pref_day"
+        android:title="Change number of Days"
+        android:defaultValue="7"
+        android:entries="@array/number_of_days"
+        android:entryValues="@array/number_of_days"/>
+</PreferenceScreen>

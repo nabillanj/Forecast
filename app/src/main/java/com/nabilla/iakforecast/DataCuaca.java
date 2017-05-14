@@ -1,32 +1,40 @@
 package com.nabilla.iakforecast;
 
 public class DataCuaca {
-    private Double min;
-    private Double max;
-    private String cuaca;
+    private Double dayTemperature;
+    private String date;
+    private String weather;
+    private String description;
 
-
-    public String getCuaca() {
-        return cuaca;
+    public Double getDayTemperature() {
+        return dayTemperature;
     }
 
-    public void setCuaca(String cuaca) {
-        this.cuaca = cuaca;
+    public void setDayTemperature(Double dayTemperature) {
+        this.dayTemperature = dayTemperature;
     }
 
-    public Double getMin() {
-        return min;
+    public String getDate() {
+        return date;
     }
 
-    public void setMin(Double min) {
-        this.min = min;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public Double getMax() {
-        return max;
+    public String getWeather() {
+        return weather;
     }
 
-    public void setMax(Double max) {
-        this.max = max;
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

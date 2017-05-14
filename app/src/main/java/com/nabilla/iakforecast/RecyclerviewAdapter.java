@@ -30,8 +30,10 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerviewAdapter.ViewHolder holder, int position) {
-        holder.tv_max.setText("Maks suhu : "+dataCuacaList.get(position).getMax().toString());
-        holder.tv_min.setText("Min suhu : "+dataCuacaList.get(position).getMin().toString());
+        holder.tvTemperature.setText(dataCuacaList.get(position).getDayTemperature().toString()+"°");
+        holder.tvMain.setText(dataCuacaList.get(position).getWeather());
+        holder.tvDescription.setText(dataCuacaList.get(position).getDescription());
+        holder.tvDay.setText(dataCuacaList.get(position).getDate());
         holder.setOnClickListener(new InterfaceOnClickListener() {
             @Override
             public void onItemClick(int selectedPos) {
@@ -48,14 +50,15 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         InterfaceOnClickListener onClickListener;
-        TextView tv_max, tv_min;
+        TextView tvDay, tvMain, tvDescription, tvTemperature;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tv_max = (TextView) itemView.findViewById(R.id.tv_max);
-            tv_min = (TextView) itemView.findViewById(R.id.tv_min);
-
+            tvDay = (TextView) itemView.findViewById(R.id.tv_day);
+            tvMain = (TextView) itemView.findViewById(R.id.tv_main);
+            tvDescription = (TextView) itemView.findViewById(R.id.tv_description);
+            tvTemperature = (TextView) itemView.findViewById(R.id.tv_temperature);
             itemView.setOnClickListener(this);
         }
 
@@ -66,8 +69,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("MaxSuhu", tv_max.getText());
-            intent.putExtra("MinSuhu", tv_min.getText());
+            intent.putExtra("MaxSuhu", tvDay.getText());
+            intent.putExtra("MinSuhu", tvMain.getText());
             context.startActivity(intent);
         }
     }
